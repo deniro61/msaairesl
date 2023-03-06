@@ -38,65 +38,7 @@ public class ReservationHistViewHandler {
         }
     }
     @StreamListener(KafkaProcessor.INPUT)
-    public void whenReservationCancelled_then_CREATE_2 (@Payload ReservationCancelled reservationCancelled) {
-        try {
-
-            if (!reservationCancelled.validate()) return;
-
-            // view 객체 생성
-            ReservationHist reservationHist = new ReservationHist();
-            // view 객체에 이벤트의 Value 를 set 함
-            reservationHist.setCustomerId(reservationCancelled.getCustomerId());
-            reservationHist.setScheduleId(reservationCancelled.getScheduleId());
-            reservationHist.setReservationId(reservationCancelled.getReservationId());
-            reservationHist.setEventType("예약취소");
-            // view 레파지 토리에 save
-            reservationHistRepository.save(reservationHist);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-    @StreamListener(KafkaProcessor.INPUT)
-    public void whenMileageincreased_then_CREATE_3 (@Payload Mileageincreased mileageincreased) {
-        try {
-
-            if (!mileageincreased.validate()) return;
-
-            // view 객체 생성
-            ReservationHist reservationHist = new ReservationHist();
-            // view 객체에 이벤트의 Value 를 set 함
-            reservationHist.setCustomerId(mileageincreased.getCustomerId());
-            reservationHist.setMileage(mileageincreased.getMileage());
-            reservationHist.setEventType("마일리지적립");
-            // view 레파지 토리에 save
-            reservationHistRepository.save(reservationHist);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-    @StreamListener(KafkaProcessor.INPUT)
-    public void whenMileageDecreased_then_CREATE_4 (@Payload MileageDecreased mileageDecreased) {
-        try {
-
-            if (!mileageDecreased.validate()) return;
-
-            // view 객체 생성
-            ReservationHist reservationHist = new ReservationHist();
-            // view 객체에 이벤트의 Value 를 set 함
-            reservationHist.setCustomerId(mileageDecreased.getCustomerId());
-            reservationHist.setMileage(mileageDecreased.getMileage());
-            reservationHist.setEventType("마일리지적립취소");
-            // view 레파지 토리에 save
-            reservationHistRepository.save(reservationHist);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-    @StreamListener(KafkaProcessor.INPUT)
-    public void whenReservationCreated_then_CREATE_5 (@Payload ReservationCreated reservationCreated) {
+    public void whenReservationCreated_then_CREATE_2 (@Payload ReservationCreated reservationCreated) {
         try {
 
             if (!reservationCreated.validate()) return;
